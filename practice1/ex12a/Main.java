@@ -1,9 +1,8 @@
 package ex12a;
-import search.*;
 public class Main {
     public static void main(String[] args) {
         var h = new MisCanHeuristic();
-        
+
         var minCostSearch = new InformedSolver(Evaluator.minCost());
         minCostSearch.solve(new MisCanWorld(3, 3, 1));
 

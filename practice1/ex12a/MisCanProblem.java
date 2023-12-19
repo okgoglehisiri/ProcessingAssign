@@ -75,6 +75,11 @@ class MisCanWorld implements World {
     public String toString() {
         return String.format("(%d, %d, %d)", this.missionary, this.cannibal, this.boat);
     }
+    @Override
+    public Integer toInt() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'toInt'");
+    }
 }
 class MisCanHeuristic implements Heuristic {
     public float eval(State s) {

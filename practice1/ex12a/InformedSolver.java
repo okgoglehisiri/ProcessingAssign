@@ -1,4 +1,4 @@
-package search;
+package ex12a;
 
 import java.util.*;
 import java.util.stream.*;
