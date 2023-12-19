@@ -36,69 +36,96 @@ class Puzzle8Action implements Action {
 class Puzzle8World implements World {
     int[] board =new int[9];
     public Puzzle8World(int[] board) {
-        this.board = board.clone();
+        for(int i = 0; i < board.length; i++){
+            this.board[i] = board[i];
+        }
     }
     public Puzzle8World clone() {
-        return new Puzzle8World(board.clone());
+        
+        return new Puzzle8World(this.board);
     }
-    // 1次元配列boardが0から8までのすべての数字を正確に1回ずつ含んでいるかをチェックしています。
-    // ただし、このチェックだけでは解けない状態（例えば、タイルの順番が完全に逆の状態）が有効と判断される可能性があります。
-    // 完全なチェックを行うには、タイルの順番に基づいて解けるかどうかの判断（パリティチェックなど）を行う必要がありますが、これは実装が複雑になります。
-    // 通常は、解ける初期状態から始めて、有効な動きのみを使用して新しい状態を生成することで、この問題を回避します。
+
     public boolean isValid() {
         boolean[] seen = new boolean[9];
-        for (int i = 0; i < board.length; i++) {
-            if (board[i] < 0 || board[i] > 8) return false;
+        for (int i = 0; i < this.board.length; i++) {
+            if (this.board[i] < 0 || this.board[i] > 8) return false;
         
-            if (seen[board[i]]) return false;
-            seen[board[i]] = true;
+            if (seen[this.board[i]]) return false;
+            seen[this.board[i]] = true;
         }
         return true;
     }
     public boolean isGoal() {
         // ゴール状態のチェック
-        for (int i = 0; i < board.length; i++) {
-            if ((board[i]+1)%9 != i) return false;
+        for (int i = 0; i < this.board.length; i++) {
+            if (this.board[i]%9 != i) return false;
         }
         return true;
     }
+
+
     public List<Action> actions() {
         return Puzzle8Action.all;
     }
+
+
     public World successor(Action action) {
         var a = (Puzzle8Action) action;
         var next = clone();
         int blankIndex = -1;
-        for(int i = 0; i < board.length; i++) {
-            if (board[i] == 0) {
+
+        // 空白の位置を見つける
+        for(int i = 0; i < this.board.length; i++) {
+            if (this.board[i] == 0) {
                 blankIndex = i;
                 break;
             }
         }
+
         int targetIndex = blankIndex + a.arrow;
 
-        if (targetIndex < 0 || targetIndex >= board.length || !isValidMove(blankIndex, targetIndex)) {
-        return null;
+        // 移動が盤面内で有効かチェック,無効なら捨てる
+        if (targetIndex < 0 || targetIndex > 8) {
+
+            return this;
         }
+        // 空白とターゲットを交換
         next.board[blankIndex] = next.board[targetIndex];
         next.board[targetIndex] = 0;
-
         return next;
+        
     }
-    
-    private boolean isValidMove(int blankIndex, int targetIndex) {
-        if (blankIndex % 3 == 0 && targetIndex % 3 == 2) return false;
-        if (blankIndex % 3 == 2 && targetIndex % 3 == 0) return false;
-        return true;
+
+ 
+
+
+    public Integer toInt(){
+        int ib = 0;
+        for (int i = 0; i < this.board.length; i++){
+            ib = ib * 10 + this.board[i];
+        }
+        return ib;
     }
+
+
     public String toString() {
             StringBuilder sb = new StringBuilder();
-            for (int i = 0; i < board.length; i++) {
-                sb.append(board[i]).append(" ");
+            for (int i = 0; i < this.board.length; i++) {
+                sb.append(this.board[i]).append(" ");
                 if ((i + 1) % 3 == 0) {
                     sb.append("\n");
                 }
             }
             return sb.toString();
         }
+}
+class Puzzle8Heuristic implements Heuristic {
+    public float eval(State s) {
+        var w = (Puzzle8World) s.world();
+        int distance = 0;
+        for (int i = 0; i < w.board.length; i++) {
+            if (w.board[i]%9 != i) distance += 1;
+        }
+        return distance;
+    }
 }

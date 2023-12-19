@@ -7,5 +7,6 @@ public interface World extends Cloneable {
     boolean isGoal();
     List<Action> actions();
     World successor(Action action);
+    Integer toInt();
 }
 
