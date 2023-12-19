@@ -1,4 +1,4 @@
-package ex12b;
+package ex12c;
 
 import java.util.*;
 

@@ -1,4 +1,4 @@
-package ex12a;
+package ex12c;
 
 import java.util.List;
 
@@ -7,5 +7,6 @@ public interface World extends Cloneable {
     boolean isGoal();
     List<Action> actions();
     World successor(Action action);
+    Integer toInt();
 }
 
