@@ -8,47 +8,48 @@ public class MisCanProblem {
 
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Please choose a search algorithm:");
-        System.out.println("1. DLSSolver");
-        System.out.println("2. IDSSolver");
-        System.out.println("3. CLSSolver");
+        // System.out.println("Please choose a search algorithm:");
+        // System.out.println("1. DLSSolver");
+        // System.out.println("2. IDSSolver");
+        // System.out.println("3. CLSSolver");
         
-        int choice = scanner.nextInt();
-        scanner.close();
+        // int choice = scanner.nextInt();
+        // scanner.close();
 
         long startTime = System.currentTimeMillis();
 
-        if (choice == 1) {
-            execDLS();
-        } else if (choice == 2) {
-            execIDS();
-        } else if (choice == 3) {
-            execCLS();
-        } else {
-            execTest();
-        }
-        
+        // if (choice == 1) {
+        //     execDLS();
+        // } else if (choice == 2) {
+        //     execIDS();
+        // } else if (choice == 3) {
+        //     execCLS();
+        // } else {
+        //     execTest();
+        // }
+        var solver = new DLSSolver();
+        solver.solve(new MisCanWorld(3, 3, 1));
         long endTime = System.currentTimeMillis();
         System.out.println("実行時間(ミリ秒):"+ (endTime-startTime));
 
         
     }
-    public static void execTest(){
-        var solver = new TestSolver();
-        solver.solve(new MisCanWorld(3, 3, 1));
-    }
-    public static void execDLS(){
-        var solver = new DLSSolver();
-        solver.solve(new MisCanWorld(3, 3, 1));
-    }
-    public static void execIDS(){
-        var solver = new IDSSolver();
-        solver.solve(new MisCanWorld(3, 3, 1));
-    }
-    public static void execCLS(){
-        var solver = new CLSSolver();
-        solver.solve(new MisCanWorld(3, 3, 1));
-    }
+    // public static void execTest(){
+    //     var solver = new TestSolver();
+    //     solver.solve(new MisCanWorld(3, 3, 1));
+    // }
+    // public static void execDLS(){
+    //     var solver = new DLSSolver();
+    //     solver.solve(new MisCanWorld(3, 3, 1));
+    // }
+    // public static void execIDS(){
+    //     var solver = new IDSSolver();
+    //     solver.solve(new MisCanWorld(3, 3, 1));
+    // }
+    // public static void execCLS(){
+    //     var solver = new CLSSolver();
+    //     solver.solve(new MisCanWorld(3, 3, 1));
+    // }
 }
 
 

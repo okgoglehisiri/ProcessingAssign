@@ -1,4 +1,4 @@
-package ex12c;
+package ex12d;
 
 import java.util.*;
 
@@ -116,7 +116,7 @@ class Puzzle8World implements World {
             return sb.toString();
         }
 }
-class Puzzle8Heuristic implements Heuristic {
+class Puzzle8H1 implements Heuristic {
     public float eval(State s) {
         var w = (Puzzle8World) s.world();
         int distance = 0;
@@ -126,4 +126,23 @@ class Puzzle8Heuristic implements Heuristic {
         return distance;
     }
 }
-
+class Puzzle8H2 implements Heuristic {
+    public float eval(State s) {
+        var w = (Puzzle8World) s.world();
+        int distance = 0;
+        for (int i = 0; i < w.board.length; i++) {
+            if (w.board[i]%9 != i) distance += 1;
+        }
+        return distance;
+    }
+}
+class Puzzle8H3 implements Heuristic {
+    public float eval(State s) {
+        var w = (Puzzle8World) s.world();
+        int distance = 0;
+        for (int i = 0; i < w.board.length; i++) {
+            if (w.board[i]%9 != i) distance += 1;
+        }
+        return distance;
+    }
+}

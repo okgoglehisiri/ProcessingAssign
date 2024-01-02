@@ -67,6 +67,7 @@ public class DFSSolver {
                 System.out.println("訪問ノード数：" + visitedNodeCount);
                 return state;
             }
+            System.out.println(state.toString());
 
             var children = state.children();
 

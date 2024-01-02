@@ -76,12 +76,16 @@ class MisCanWorld implements World {
     }
 
 }
+// ヒューリスティクス関数
+// 対岸に渡っていない宣教師の数が小さいStateが良いものとされる
 class MisCanHeuristic implements Heuristic {
     public float eval(State s) {
         var w = (MisCanWorld) s.world();
         return w.missionary;
     }
 }
+// ヒューリスティクス関数
+// 対岸に渡っていない宣教師の数と人喰い人の和が小さいStateが良いものとされる
 class BetterMisCanHeuristic implements Heuristic {
     public float eval(State s) {
         var w = (MisCanWorld) s.world();
